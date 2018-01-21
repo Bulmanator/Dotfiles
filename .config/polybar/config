@@ -1,0 +1,298 @@
+[colours]
+bg = ${xrdb:color0}
+fg = ${xrdb:color7}
+colour0  = ${xrdb:color0}
+colour1  = ${xrdb:color1}
+colour2  = ${xrdb:color2}
+colour3  = ${xrdb:color3}
+colour4  = ${xrdb:color4}
+colour5  = ${xrdb:color5}
+colour6  = ${xrdb:color6}
+colour7  = ${xrdb:color7}
+colour8  = ${xrdb:color8}
+colour9  = ${xrdb:color9}
+colour10 = ${xrdb:color10}
+colour11 = ${xrdb:color11}
+colour12 = ${xrdb:color12}
+colour13 = ${xrdb:color13}
+colour14 = ${xrdb:color14}
+colour15 = ${xrdb:color15}
+
+[settings]
+screenchange-reload = true
+
+; Desktop Bars
+[bar/DesktopLeft]
+monitor = DVI-I-1
+width = 100%
+height = 25
+
+fixed-center = true
+bottom = true
+
+line-size = 2
+module-margin = 2
+
+background = ${colours.bg}
+foreground = ${colours.fg}
+
+border-size = 3
+border-color = ${colours.bg}
+
+modules-left = i3
+modules-center = music 
+modules-right = wired temp cpu volume date
+
+tray-position = right
+tray-padding = 4
+
+; font-0 = SourceHanSans:size=11;1
+font-0 = Noto Sans CJK JP:size=11;1
+font-1 = PolybarFont:pixelsize=11;1
+font-2 = DejaVuSans:pixelsize=11;1
+
+; [bar/DesktopRight]
+
+
+; Laptop Configuration
+[bar/Laptop]
+width = 100%
+height = 25
+
+fixed-center = true
+bottom = true
+
+line-size = 2
+module-margin = 2
+
+background = ${colours.bg}
+foreground = ${colours.fg}
+
+border-size = 3
+border-color = ${colours.bg}
+
+modules-left = i3
+modules-center = music 
+modules-right = wifi wired temp cpu volume light battery date
+
+tray-position = right
+tray-padding = 2
+
+font-0 = SourceHanSans:size=11;1
+font-1 = PolybarFont:pixelsize=11;1
+font-2 = DejaVuSans:pixelsize=11;1
+
+; ;
+; Left Modules
+; ;
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+
+; Various i3 Parameters
+index-sort = true
+; pin-workspaces = true
+strip-wsnumbers = true
+wrapping-scroll = false
+
+label-mode = %mode%
+label-mode-padding = 2
+label-mode-background = ${colours.colour4}
+
+; Focused Workspace
+label-focused = %name%
+label-focused-background = ${colours.bg}
+label-focused-foreground = ${colours.fg}
+label-focused-underline = ${colours.colour3}
+label-focused-padding = 4
+
+; Unfocused Workspace
+label-unfocused = %name%
+label-unfocused-background = ${colours.bg}
+label-unfocused-foreground = ${colours.colour3}
+label-unfocused-underline = ${colours.fg}
+label-unfocused-padding = 4
+
+; Visible Workspace
+label-visible = %name%
+label-visible-background = ${colours.bg}
+label-visible-foreground = ${colours.colour3}
+label-visible-underline = ${colours.fg}
+label-visible-padding = 4
+
+; Urgent Workspace
+label-urgent = %name%
+label-urgent-background = ${colours.colour4}
+label-urgent-foreground = ${colours.fg}
+label-urgent-underline = ${colours.colour4}
+label-urgent-padding = 4
+
+; ;
+; Centre Modules
+; ;
+
+[module/music]
+type = custom/script
+exec = mediactrl
+interval = 5
+
+format-prefix = " "
+format-underline = ${colours.colour3}
+
+click-left = mediactrl prev
+click-right = mediactrl next
+click-middle = mediactrl toggle
+
+; ;
+; Right Modules
+; ;
+
+[module/wifi]
+type = internal/network
+interval = 10
+
+interface = wlp2s0
+
+ramp-signal-0 = " "
+ramp-signal-1 = " "
+ramp-signal-2 = " "
+ramp-signal-3 = " "
+ramp-signal-4 = " "
+ramp-signal-foreground = ${colours.fg}
+
+format-connected = <ramp-signal> <label-connected>
+format-connected-underline = ${colours.colour14}
+label-connected = %essid% (%signal%%)
+
+; Don't show the module if WiFi isn't connected
+fomat-disconnected = 
+
+
+[module/wired]
+type = internal/network
+interval = 10
+
+interface = enp3s0
+
+format-connected-prefix = " "
+format-connected = <label-connected>
+label-connected = "Wired Connection"
+format-connected-underline = ${colours.colour14}
+
+format-disconnected = 
+
+
+[module/temp]
+type = internal/temperature
+interval = 10
+
+hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon2/temp1_input
+warn-temperature = 80
+
+ramp-0 = " "
+ramp-1 = " "
+ramp-2 = " "
+ramp-3 = " "
+ramp-4 = " "
+ramp-foreground = ${colours.fg}
+
+format = <ramp> <label>
+format-underline = ${colours.colour13}
+
+format-warn = <ramp> <label-warn>
+format-warn-underline = #F00
+
+label = %temperature%
+label-warn = %temperature%
+label-warn-foreground = ${colours.colour3}
+
+
+[module/cpu]
+type = internal/cpu
+interval = 3
+
+format-prefix = " "
+format = <label>
+format-underline = ${colours.colour12}
+label = %percentage%%
+
+
+[module/volume]
+type = internal/volume
+
+master-mixer = Headphone
+
+ramp-volume-0 = " "
+ramp-volume-1 = " "
+ramp-volume-2 = " "
+
+format-volume = <ramp-volume> <label-volume>
+format-volume-underline = ${colours.colour11}
+label-muted =   %percentage%%
+label-muted-foreground = ${colours.colour3}
+
+
+[module/light]
+type = internal/backlight
+card = intel_backlight
+
+ramp-0 = 🌕
+ramp-1 = 🌔
+ramp-2 = 🌓
+ramp-3 = 🌒
+ramp-4 = 🌑
+
+format = <ramp> <label>
+format-underline = ${colours.colour12}
+
+[module/battery]
+type = internal/battery
+
+battery = BAT0
+adapter = AC
+full-at = 96
+
+; Discharging
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+format-discharging = <ramp-capacity> <label-discharging>
+format-discharging-foreground = ${colours.fg}
+format-discharging-underline = ${colours.colour13}
+
+; Charging
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-capacity-4 = 
+animation-charging-foreground = ${colours.fg}
+animation-charging-framerate = 750
+
+format-charging = <animation-charging> <label-charging>
+format-charging-foreground = ${colours.fg}
+format-charging-underline = ${colours.colour13}
+
+; Fully Charged
+format-full-prefix = " "
+format-full-foreground = ${colours.fg}
+format-full-underline = ${colours.colour13}
+
+
+[module/date]
+type = internal/date
+interval = 30
+
+date = %a %d %b
+time = %H:%M
+
+format-prefix = " "
+format-underline = ${colours.colour14}
+
+label = %date%, %time%
+
+

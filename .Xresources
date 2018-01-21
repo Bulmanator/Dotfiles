@@ -1,0 +1,24 @@
+! Xcursor.theme: Breeze-White
+
+! Font rendering
+
+Xft.dpi: 96
+Xft.antialias: true      
+Xft.hinting: true
+Xft.rgba: rgb 
+Xft.autohint: false
+Xft.hintstyle: hintslight
+Xft.lcdfilter: lcddefault
+
+! URxvt Variables
+
+URxvt.secondaryScreen: 1
+URxvt.secondaryScroll: 0
+URxvt.scrollBar: false
+
+URxvt.font: xft:Ubuntu Mono:pixelsize=16
+URxvt.borderless: true
+
+! URxvt.perl-ext-common: default,matcher
+! URxvt.url-launcher: /usr/bin/xdg-open
+! URxvt.matcher.button: 1

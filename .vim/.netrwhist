@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/home/james/Documents/Aerolites/Engine/src/com/teamtwo/engine/Graphics'
+let g:netrw_dirhist_2='/home/james/Documents/Aerolites/Engine/src/com/teamtwo/engine/Graphics/Particles'
+let g:netrw_dirhist_3='/home/james/Documents/PixelEngine/Code/Core'
+let g:netrw_dirhist_4='/home/james/.config/i3'
+let g:netrw_dirhist_5='/home/james/.config'
+let g:netrw_dirhist_6='/home/james'
+let g:netrw_dirhist_7='/home/james/Documents/Coding/Python/wal-tui/t-ui'
+let g:netrw_dirhist_8='/home/james/Documents/Coding/ProjectLantern'
+let g:netrw_dirhist_9='/home/james/Documents/Coding/ProjectLantern/code'
