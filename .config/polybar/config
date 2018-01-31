@@ -146,8 +146,8 @@ label-visible-padding = 4
 ; Urgent Workspace
 label-urgent = %name%
 label-urgent-background = ${colours.colour4}
-label-urgent-foreground = ${colours.fg}
-label-urgent-underline = ${colours.colour4}
+label-urgent-foreground = ${colours.bg}
+label-urgent-underline = ${colours.colour3}
 label-urgent-padding = 4
 
 ; ;
