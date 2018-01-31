@@ -7,8 +7,18 @@ killall -q polybar
 while pgrep -x polybar > /dev/null; do sleep 1; done
 
 # Launch Bar
-polybar DesktopLeft &
-# TODO
-# polybar DesktopRight &
+if [ "$HOSTNAME" == "Kanto" ]
+then
+    # Running on desktop
+    polybar DesktopLeft &
+    polybar DesktopRight &
+elif [ "$HOSTNAME" == "Tokyo" ]
+then
+    # Running on Laptop
+    polybar Laptop &
+else
+    echo "Unknown Device!"
+fi
+
 
 echo "Bars Launched!"
