@@ -36,12 +36,14 @@ module-margin = 2
 background = ${colours.bg}
 foreground = ${colours.fg}
 
+separator = |
+
 border-size = 3
 border-color = ${colours.bg}
 
 modules-left = i3
 modules-center = music
-modules-right = wired fs_root fs_home volume date
+modules-right = wired fs_root fs_home d_volume date
 
 font-0 = Noto Sans CJK JP:size=11;1
 font-1 = PolybarFont:pixelsize=11;1
@@ -61,12 +63,14 @@ module-margin = 2
 background = ${colours.bg}
 foreground = ${colours.fg}
 
+separator = |
+
 border-size = 3
 border-color = ${colours.bg}
 
 modules-left = i3
 modules-center = music
-modules-right = temp cpu memory volume date
+modules-right = temp cpu memory d_volume date
 
 tray-position = right
 tray-padding = 4
@@ -90,12 +94,14 @@ module-margin = 2
 background = ${colours.bg}
 foreground = ${colours.fg}
 
+separator = |
+
 border-size = 3
 border-color = ${colours.bg}
 
 modules-left = i3
 modules-center = music
-modules-right = wifi wired temp cpu volume light battery date
+modules-right = wifi wired temp cpu l_volume light battery date
 
 tray-position = right
 tray-padding = 2
@@ -268,7 +274,7 @@ format-underline = ${colours.colour12}
 label = %gb_free%
 
 
-[module/volume]
+[module/d_volume]
 type = internal/volume
 
 master-mixer = Headphone
@@ -281,6 +287,20 @@ format-volume = <ramp-volume> <label-volume>
 format-volume-underline = ${colours.colour11}
 label-muted =   %percentage%%
 label-muted-foreground = ${colours.colour3}
+
+[module/l_volume]
+type = internal/volume
+
+ramp-volume-0 = " "
+ramp-volume-1 = " "
+ramp-volume-2 = " "
+
+format-volume = <ramp-volume> <label-volume>
+format-volume-underline = ${colours.colour11}
+format-muted-underline = ${colours.fg}
+label-muted =   %percentage%%
+label-muted-foreground = ${colours.colour3}
+
 
 [module/light]
 type = internal/backlight
