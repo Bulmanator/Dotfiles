@@ -40,18 +40,40 @@ border-size = 3
 border-color = ${colours.bg}
 
 modules-left = i3
-modules-center = music 
-modules-right = wired temp cpu volume date
+modules-center = music
+modules-right = wired fs_root fs_home volume date
 
-tray-position = right
-tray-padding = 4
-
-; font-0 = SourceHanSans:size=11;1
 font-0 = Noto Sans CJK JP:size=11;1
 font-1 = PolybarFont:pixelsize=11;1
 font-2 = DejaVuSans:pixelsize=11;1
 
-; [bar/DesktopRight]
+[bar/DesktopRight]
+monitor = DVI-D-0
+width = 100%
+height = 25
+
+fixed-center = true
+bottom = true
+
+line-size = 2
+module-margin = 2
+
+background = ${colours.bg}
+foreground = ${colours.fg}
+
+border-size = 3
+border-color = ${colours.bg}
+
+modules-left = i3
+modules-center = music
+modules-right = temp cpu memory volume date
+
+tray-position = right
+tray-padding = 4
+
+font-0 = Noto Sans CJK JP:size=11;1
+font-1 = PolybarFont:pixelsize=11;1
+font-2 = DejaVuSans:pixelsize=11;1
 
 
 ; Laptop Configuration
@@ -72,13 +94,13 @@ border-size = 3
 border-color = ${colours.bg}
 
 modules-left = i3
-modules-center = music 
+modules-center = music
 modules-right = wifi wired temp cpu volume light battery date
 
 tray-position = right
 tray-padding = 2
 
-font-0 = SourceHanSans:size=11;1
+font-0 = Noto Sans CJK JP:size=11;1
 font-1 = PolybarFont:pixelsize=11;1
 font-2 = DejaVuSans:pixelsize=11;1
 
@@ -92,7 +114,7 @@ format = <label-state> <label-mode>
 
 ; Various i3 Parameters
 index-sort = true
-; pin-workspaces = true
+pin-workspaces = true
 strip-wsnumbers = true
 wrapping-scroll = false
 
@@ -137,7 +159,7 @@ type = custom/script
 exec = mediactrl
 interval = 5
 
-format-prefix = " "
+;format-prefix = " "
 format-underline = ${colours.colour3}
 
 click-left = mediactrl prev
@@ -166,7 +188,7 @@ format-connected-underline = ${colours.colour14}
 label-connected = %essid% (%signal%%)
 
 ; Don't show the module if WiFi isn't connected
-fomat-disconnected = 
+format-disconnected =
 
 
 [module/wired]
@@ -180,8 +202,27 @@ format-connected = <label-connected>
 label-connected = "Wired Connection"
 format-connected-underline = ${colours.colour14}
 
-format-disconnected = 
+format-disconnected =
 
+[module/fs_abstract]
+type = internal/fs
+interval = 60
+
+format-mounted-prefix = " "
+format-mounted = <label-mounted>
+format-mounted-underline = ${colours.colour12}
+
+[module/fs_root]
+inherit = module/fs_abstract
+
+mount-0 = /
+label-mounted = Root: %percentage_used%%
+
+[module/fs_home]
+inherit = module/fs_abstract
+
+mount-0 = /home
+label-mounted = Home: %percentage_used%%
 
 [module/temp]
 type = internal/temperature
@@ -218,6 +259,15 @@ format-underline = ${colours.colour12}
 label = %percentage%%
 
 
+[module/memory]
+type = internal/memory
+
+format-prefix = " "
+format = <label>
+format-underline = ${colours.colour12}
+label = %gb_free%
+
+
 [module/volume]
 type = internal/volume
 
@@ -231,7 +281,6 @@ format-volume = <ramp-volume> <label-volume>
 format-volume-underline = ${colours.colour11}
 label-muted =   %percentage%%
 label-muted-foreground = ${colours.colour3}
-
 
 [module/light]
 type = internal/backlight
@@ -289,6 +338,9 @@ interval = 30
 
 date = %a %d %b
 time = %H:%M
+
+date-alt = %d %B %Y
+time-alt = %H:%M
 
 format-prefix = " "
 format-underline = ${colours.colour14}

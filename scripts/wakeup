@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+
+Debug=false
+
+# Enable for Firefox
+Firefox=true
+
+# Other possible programs
+Chromium=false
+VLC=false
+MPV=false
+
+ActiveWindow() {
+    xprop -id "$(xprop -root _NET_ACTIVE_WINDOW | awk '{print $5}')"    
+}
+
+IsFullscreen() {
+    ActiveWindow | grep -q _NET_WM_STATE_FULLSCREEN    
+}
+
+DPMSEnabled() {
+    xset -q | grep -i dpms | grep Enabled | awk '{print $3}'    
+}
+
+ShouldDelay() {
+    Application=$(ActiveWindow | grep "WM_CLASS(STRING)" | awk '{print $4}')
+
+    if ! IsFullscreen;
+    then
+        $Debug && echo "Active window is not fullscreen"
+        return 1;
+    fi 
+
+    if $Firefox && [[ $Application = *Firefox* ]] && pgrep firefox &>/dev/null;
+    then
+        $Debug && echo "A Firefox window is fullscreen"
+        return 0  
+    elif $Firefox &&
+            [[ $Application = *"/usr/lib/firefox/plugin-container"* ]] &&
+                pgrep firefox &>/dev/null;
+    then
+        $Debug && echo "A Firefox flash window is fullscreen"
+        return 0
+    fi
+}
+
+delay=${1:-120}
+
+if [[ $delay = *[^0-9]* || $delay = 0 ]];
+then
+    echo "Usage: wakeup <delay>"
+    echo "-------------------------------------------"
+    echo "delay: The number of seconds to wait before"
+    echo "       checking for fullscreen again" 
+    echo "       (Default = 120)"
+    echo ""
+    echo "Expected a positive number for \"delay\""
+    
+    exit 1
+fi
+
+while true;
+do
+    if ShouldDelay;
+    then 
+        $Debug && echo "Delaying Sleep"
+        xset -dpms
+        xset +dpms
+    fi
+    sleep "$delay"
+done

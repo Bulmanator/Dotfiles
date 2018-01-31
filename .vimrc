@@ -2,10 +2,11 @@
 
 " Vim remembers 500 lines of history
 set history=500
-" File type indentation
-filetype indent on
 " Automatically reload file if changed externally
 set autoread
+
+" Make Alt key work in URxvt
+set termencoding=latin1
 
 " Leader commands, fast saving with ,w in normal mode
 let mapleader = ","
@@ -25,26 +26,18 @@ set number
 set splitright
 autocmd VimResized * wincmd =
 
-" A scratch buffer to scribble in
-silent vnew *scatch*
-setlocal buftype=nowrite
-setlocal noswapfile
-
 " Configure backspace to act correctly
 set backspace=eol,start,indent
 set whichwrap+=<,>,h,l
 
 " Search
-set ignorecase
 set smartcase
-
-set hlsearch
-
-set lazyredraw
-
 set magic
 
+set hlsearch
 set showmatch
+set lazyredraw
+
 set mat=2
 
 " Remove bell noises
@@ -81,7 +74,13 @@ if has('gui_running')
     set guioptions-=r
     set guioptions-=L
     set t_Co=256
-    colorscheme scheme 
+    colorscheme scheme
+
+    " A scratch buffer to scribble in
+    " Only open when in GVim
+    silent vnew *scatch*
+    setlocal buftype=nowrite
+    setlocal noswapfile
 endif
 
 set encoding=utf8
@@ -94,6 +93,9 @@ set nowb
 " Tabs and Indentation
 set expandtab
 set smarttab
+
+" File type indentation
+filetype indent on
 
 " 1 Tab = 4 Spaces
 set shiftwidth=4

@@ -11,5 +11,5 @@ syn keyword cType float32 float64 real32 real64
 syn keyword cType f32 f64 r32 r64
 
 " Highlight @ notes in comments
-syn match cTodo "@\(Todo\|Note\|Redundant\|Optimise\|Fix\|Debug\)\(([A-z ]* )\)\?:" 
+syn match cTodo "@\(Todo\|Note\|Redundant\|Optimise\|Fix\|Debug\|Leak\)\(([A-z ]\+):\)\?:\?"
 

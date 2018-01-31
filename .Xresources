@@ -1,11 +1,11 @@
-! Xcursor.theme: Breeze-White
+Xcursor.theme: Paper
 
 ! Font rendering
 
 Xft.dpi: 96
-Xft.antialias: true      
+Xft.antialias: true
 Xft.hinting: true
-Xft.rgba: rgb 
+Xft.rgba: rgb
 Xft.autohint: false
 Xft.hintstyle: hintslight
 Xft.lcdfilter: lcddefault
@@ -19,6 +19,3 @@ URxvt.scrollBar: false
 URxvt.font: xft:Ubuntu Mono:pixelsize=16
 URxvt.borderless: true
 
-! URxvt.perl-ext-common: default,matcher
-! URxvt.url-launcher: /usr/bin/xdg-open
-! URxvt.matcher.button: 1
