@@ -19,14 +19,20 @@ function Help {
     exit 1;
 }
 
-if [ $COMMAND == "help" ]; then
+if [ "$COMMAND" = "help" ]; then
     Help
-fi 
+fi
 
 if [ "$EUID" -ne 0 ];
 then
     echo "Please run this script as root"
     echo "Use \"vpn help\" for information"
+    exit 1
+fi
+
+if [ "$1" = "" ]; then
+    echo "Please enter a configuration"
+	echo "Use \"vpn help\" for information"
     exit 1
 fi
 
@@ -72,14 +78,14 @@ case "$COMMAND" in
         if [[ ! -z "$VPN" && ! -z "$Using" ]];
         then
             Active=$(systemctl is-active openvpn-client@$Using.service)
-            echo "${Using^} : ${Active^}" 
+            echo "${Using^} : ${Active^}"
         else
             Available=$(ls /etc/openvpn/client | grep .conf)
-	        for Config in $Available 
+	        for Config in $Available
 	        do
                 Config=$(echo $Config | cut -d'.' -f1)
 		        Active=$(systemctl is-active openvpn-client@$Config.service)
-                echo "${Config^} : ${Active^}" 
+                echo "${Config^} : ${Active^}"
 	        done
         fi
 	    ;;
@@ -93,7 +99,7 @@ case "$COMMAND" in
             do
                 Config=$(echo $Config | cut -d'.' -f1)
                 Enabled=$(systemctl is-enabled openvpn-client@$Config.service)
-                echo "${Config^} : ${Enabled^}" 
+                echo "${Config^} : ${Enabled^}"
             done
         fi
         ;;
