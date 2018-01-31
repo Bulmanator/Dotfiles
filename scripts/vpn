@@ -1,0 +1,105 @@
+#!/usr/bin/env bash
+
+COMMAND=$1
+VPN=$2
+
+function Help {
+    echo "Utility to start OpenVPN Configurations"
+    echo "Configuration Location: /etc/openvpn/client"
+    echo ""
+    echo "usage: vpn [start|stop|enable|disable|is-enabled|is-active] [VPN Name]"
+    echo "Arguments:"
+    echo "  - help       : Show this message"
+    echo "  - start      : Starts the given VPN configuration"
+    echo "  - stop       : Stops the given VPN configuration"
+    echo "  - enable     : Enables to given VPN configuration to start at boot"
+    echo "  - disable    : Disbales the given VPN configuration"
+    echo "  - is-active  : Checks if the given VPN configuration is connected or not"
+    echo "  - is-enabled : Checks if the given VPN configuratino is enabled or not"
+    exit 1;
+}
+
+if [ $COMMAND == "help" ]; then
+    Help
+fi 
+
+if [ "$EUID" -ne 0 ];
+then
+    echo "Please run this script as root"
+    echo "Use \"vpn help\" for information"
+    exit 1
+fi
+
+Avaiable=$(ls /etc/openvpn/client | grep .conf)
+
+Using=""
+for Config in $Avaiable
+do
+    Config=$(echo $Config | cut -d'.' -f1)
+    if [ "$Config" == "$VPN" ];
+    then
+        Using="$Config"
+        break
+    fi
+done
+
+if [ -z "$Using" ] && [ "$COMMAND" != "is-active" -a "$COMMAND" != "is-enabled" ];
+then
+    echo "No Configuration named \"$VPN\" was found in /etc/openvpn/client"
+    exit 1
+fi
+
+case "$COMMAND" in
+	start)
+	    echo "Connecting..."
+	    systemctl start openvpn-client@$Using
+	    echo "Connected to ${Using^}"
+	    ;;
+	stop)
+	    echo "Disconnecting..."
+	    systemctl stop openvpn-client@$Using
+	    echo "Stopped VPN for ${Using^}"
+	    ;;
+	enable)
+        echo "Enabling openvpn-client@$Using.service"
+        systemctl enable openvpn-client@$Using
+	    ;;
+	disable)
+        echo "Disabling openvpn-client@$Using.service"
+        systemctl disable openvpn-client@$Using
+	    ;;
+	is-active)
+        if [[ ! -z "$VPN" && ! -z "$Using" ]];
+        then
+            Active=$(systemctl is-active openvpn-client@$Using.service)
+            echo "${Using^} : ${Active^}" 
+        else
+            Available=$(ls /etc/openvpn/client | grep .conf)
+	        for Config in $Available 
+	        do
+                Config=$(echo $Config | cut -d'.' -f1)
+		        Active=$(systemctl is-active openvpn-client@$Config.service)
+                echo "${Config^} : ${Active^}" 
+	        done
+        fi
+	    ;;
+    is-enabled)
+        if [[ ! -z $VPN && ! -z $Using ]];
+        then
+            Enabled=$(systemctl is-enabled openvpn-client@$Using.service)
+            echo "${Using^} : ${Enabled^}"
+        else
+            for Config in $Avaiable;
+            do
+                Config=$(echo $Config | cut -d'.' -f1)
+                Enabled=$(systemctl is-enabled openvpn-client@$Config.service)
+                echo "${Config^} : ${Enabled^}" 
+            done
+        fi
+        ;;
+    *)
+	    echo "Unknown argument \"$COMMAND\""
+	    echo "Use \"vpn help\" for information"
+	    exit 1
+esac
+
