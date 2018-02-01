@@ -26,6 +26,11 @@ set number
 set splitright
 autocmd VimResized * wincmd =
 
+" Hide the wildmenu
+set completeopt=preview
+set wildmode=longest,full
+set wildmenu
+
 " Configure backspace to act correctly
 set backspace=eol,start,indent
 set whichwrap+=<,>,h,l
