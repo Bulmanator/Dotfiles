@@ -102,6 +102,9 @@ set smarttab
 " File type indentation
 filetype indent on
 
+" Correct indentation for case satements
+set cino=l1
+
 " 1 Tab = 4 Spaces
 set shiftwidth=4
 set tabstop=4
