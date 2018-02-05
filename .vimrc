@@ -5,8 +5,10 @@ set history=500
 " Automatically reload file if changed externally
 set autoread
 
-" Make Alt key work in URxvt
-set termencoding=latin1
+if !has('gui_running')
+    " Make Alt key work in URxvt
+    set termencoding=latin1
+endif
 
 " Leader commands, fast saving with ,w in normal mode
 let mapleader = ","
