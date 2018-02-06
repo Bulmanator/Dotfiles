@@ -63,7 +63,6 @@ endtry
 " Status bar
 set laststatus=2
 set statusline=
-set statusline+=%#TabLineFill#
 set statusline+=\ File:\ [%n]\ %f
 set statusline+=%m
 set statusline+=%=
