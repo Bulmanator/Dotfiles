@@ -62,17 +62,20 @@ endtry
 
 " Status bar
 set laststatus=2
-set statusline=\ %F%m%r%h\ %w\ \ Dir:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
+set statusline=
+set statusline+=%#TabLineFill#
+set statusline+=\ File:\ [%n]\ %f
+set statusline+=%m
+set statusline+=%=
+set statusline+=Type:\ %Y
+set statusline+=\ Line:\ %l
+set statusline+=\ Column:\ %c\ 
 
+" Enable syntax highlighting
 syntax enable
 
-" Colour Scheme
-"set background=dark
-
-" Enable 256 colour palette in Gnome Terminal
-if $COLORTERM == 'gnome-terminal'
-    set t_Co=256
-endif
+" Show the line the cursor is at
+set cursorline
 
 " For GVim
 if has('gui_running')
@@ -82,10 +85,11 @@ if has('gui_running')
     set guioptions-=L
     set t_Co=256
     colorscheme scheme
+    set guifont=Ubuntu\ Mono\ 12
 
     " A scratch buffer to scribble in
     " Only open when in GVim
-    silent vnew *scatch*
+    silent vnew *scratch*
     setlocal buftype=nowrite
     setlocal noswapfile
 endif
@@ -121,7 +125,7 @@ set si
 set wrap
 
 " Trim trailing whitespace when saving
-autocmd BufWritePre * %s/\s\+$//e
+autocmd FileType c,cpp,java,python autocmd BufWritePre <buffer> %s/\s\+$//e 
 
 " Keybindings
 map <space> /
