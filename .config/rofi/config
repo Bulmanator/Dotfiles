@@ -3,6 +3,10 @@
 ! Other
 rofi.threads: 2
 rofi.modi: window,drun,ssh
+rofi.drun-match-fields: name
+
+! Colour Scheme
+rofi.theme: ~/.cache/wal/colors-rofi-dark.rasi
 
 ! Other looks
 rofi.separator-style: none
@@ -19,4 +23,4 @@ rofi.width: 100
 rofi.location: 1
 
 ! Desktop Run
-rofi.display-drun: Search Programs
+rofi.display-drun: Search Programs: 
