@@ -4,6 +4,7 @@
 rofi.threads: 2
 rofi.modi: window,drun,ssh
 rofi.drun-match-fields: name
+rofi.sort: true
 
 ! Colour Scheme
 rofi.theme: ~/.cache/wal/colors-rofi-dark.rasi
