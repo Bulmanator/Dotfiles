@@ -10,6 +10,13 @@ syn keyword cType u8 u16 u32 u64
 syn keyword cType float32 float64 real32 real64
 syn keyword cType f32 f64 r32 r64
 
+" global and internal for static
+syn keyword cStorageClass global
+syn keyword cStorageClass internal
+
+" Cast keyword
+syn keyword cStatement cast
+
 " Highlight @ notes in comments
 syn match cTodo "@\(Todo\|Note\|Redundant\|Optimise\|Fix\|Debug\|Leak\)\(([A-z ]\+):\)\?:\?"
 

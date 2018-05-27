@@ -84,13 +84,12 @@ if has('gui_running')
     set guioptions-=L
     set t_Co=256
     colorscheme scheme
+
+    " @Todo: Fix this for Windows
     set guifont=Ubuntu\ Mono\ 12
 
-    " A scratch buffer to scribble in
     " Only open when in GVim
-    silent vnew *scratch*
-    setlocal buftype=nowrite
-    setlocal noswapfile
+    vsplit
 endif
 
 set encoding=utf8
