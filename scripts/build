@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+PROJECT=""
+PROJECT="${PROJECT,,}"
+PROJECT="${PROJECT^}"
+
+COMPILER=${COMPILER-"clang++"}
+
+echo "Compiling with \"$COMPILER\"..."
+
+# Source and Executable Options
+MainSource="Linux_${PROJECT}.cpp"
+
+# Compilation Options
+CompilerFlags="-ggdb"
+Defines="-D${PROJECT^^}_INTERNAL -D${PROJECT^^}_SLOW -D${PROJECT^^}_LINUX"
+LinkerFlags="Put Linked Libraries here"
+
+if [ ! -d "../build" ];
+then
+    mkdir ../build
+fi
+
+pushd ../build > /dev/null
+
+$COMPILER $CompilerFlags $Defines ../code/$MainSource -o $PROJECT $LinkerFlags 2>&1 | grep "error\|warning" # | compile
+
+popd > /dev/null

@@ -10,9 +10,10 @@ syn keyword cType u8 u16 u32 u64
 syn keyword cType float32 float64 real32 real64
 syn keyword cType f32 f64 r32 r64
 
-" global and internal for static
+" global, internal and local for static
 syn keyword cStorageClass global
 syn keyword cStorageClass internal
+syn keyword cStorageClass local
 
 " Cast keyword
 syn keyword cStatement cast
