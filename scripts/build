@@ -14,7 +14,7 @@ MainSource="Linux_${PROJECT}.cpp"
 # Compilation Options
 CompilerFlags="-ggdb"
 Defines="-D${PROJECT^^}_INTERNAL -D${PROJECT^^}_SLOW -D${PROJECT^^}_LINUX"
-LinkerFlags="Put Linked Libraries here"
+LinkerFlags=""
 
 if [ ! -d "../build" ];
 then
