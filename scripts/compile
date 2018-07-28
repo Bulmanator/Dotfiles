@@ -2,9 +2,8 @@
 # @Todo: Test this shebang works for linux -- It should though
 
 import sys
+import os
 import re
-
-### @Todo: Terminal clipping based on columns available
 
 colours = {
     "Black"      : '\033[0;30m',
@@ -30,6 +29,8 @@ show_warnings = False
 
 if __name__ == "__main__":
 
+    terminal_columns = os.get_terminal_size()[0]
+
     # Collate all of the data into dictionaries
     lines = []
     for line in sys.stdin:
@@ -52,6 +53,7 @@ if __name__ == "__main__":
         elif len(data) == 3:
             line_data["Type"] = "Linker"
             line_data["Message"] = data[2].lstrip()
+            line_data["Line"] = "---"
 
         lines.append(line_data)
 
@@ -86,6 +88,9 @@ if __name__ == "__main__":
     header = "| File".ljust(filename + 2) + "| " + "Line".ljust(line_number) + "| "
     header += "Type".ljust(type_len) + "| "
 
+    if (len(header) + message > terminal_columns):
+        message = terminal_columns - len(header)
+
     print(header + "Message")
     print("-"*(len(header) + message))
     did_error = False
@@ -104,8 +109,11 @@ if __name__ == "__main__":
             colour = colours["Purple"]
             did_error = True
 
+        if (len(data["Message"]) > message):
+            data["Message"] = data["Message"][0:message - 3] + "..."
+
         line = line + colour + data["Type"].ljust(type_len) + colours["LightGray"] + "| "
-        line = line + colours["NoColour"] + data["Message"];
+        line = line + colours["NoColour"] + data["Message"]
 
         print(line.strip('\n'))
 
