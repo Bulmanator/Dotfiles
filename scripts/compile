@@ -1,4 +1,5 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
+# @Todo: Test this shebang works for linux -- It should though
 
 import sys
 import re
@@ -32,6 +33,7 @@ if __name__ == "__main__":
     # Collate all of the data into dictionaries
     lines = []
     for line in sys.stdin:
+        line = re.sub(r"[\(,]", ":", line).replace(')', "")
         data = re.split(r"(?<!:):(?!:)", line);
         if len(data) < 3: continue
         elif data[1].strip() == "error": continue
