@@ -24,5 +24,5 @@ syn keyword cStatement cast
 syn keyword cStatement Assert
 
 " Highlight @ notes in comments
-syn match cTodo "@\(Todo\|Note\|Redundant\|Optimise\|Fix\|Debug\|Leak\)\(([A-z ]\+):\)\?:\?"
+syn match cTodo "@\(Todo\|Note\|Redundant\|Optimise\|Fix\|Debug\|Leak\|Cleanup\|Temporary\)\(([A-z ]\+):\)\?:\?"
 
