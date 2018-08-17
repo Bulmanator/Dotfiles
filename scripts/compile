@@ -34,8 +34,12 @@ if __name__ == "__main__":
     # Collate all of the data into dictionaries
     lines = []
     for line in sys.stdin:
-        line = re.sub(r"[\(,]", ":", line).replace(')', "")
         data = re.split(r"(?<!:):(?!:)", line);
+        if '(' in data[0]:
+            data[0] = re.sub(r"[\(,]", ":", data[0]).replace(')', "")
+            tmp_data = re.split(r"(?<!:):(?!:)", data[0])
+            data = tmp_data + data[1:]
+
         if len(data) < 3: continue
         elif data[1].strip() == "error": continue
 
