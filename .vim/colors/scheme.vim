@@ -23,12 +23,13 @@ hi CursorLine   guibg=#555555 ctermbg=122 gui=None
 hi WildMenu     guifg=#FFFFFF guibg=#232323 gui=bold ctermfg=white ctermbg=235 cterm=bold
 hi WarningMsg   guifg=#FFFF00 guibg=#232323 gui=bold ctermfg=226 ctermbg=235 cterm=bold
 
-hi Statement    guifg=#14E934 guibg=#232323 ctermfg=47  ctermbg=235
 hi Comment      guifg=#FFFF00 guibg=#232323 ctermfg=226 ctermbg=235
+hi PreProc      guifg=#FF6600 guibg=#232323 ctermfg=208 ctermbg=235
+
+hi Statement    guifg=#66FF99 guibg=#232323 ctermfg=47  ctermbg=235
 hi Type         guifg=#4FDEAF guibg=#232323 gui=NONE    ctermfg=49 ctermbg=235 cterm=NONE
 hi Typedef      guifg=#4FDE59 guibg=#232323 ctermfg=41  ctermbg=235
 hi StorageClass guifg=#4FDE59 guibg=#232323 ctermfg=41  ctermbg=235
-hi PreProc      guifg=#FFB56C guibg=#232323 ctermfg=208 ctermbg=235
 hi Constant     guifg=#66CCFF guibg=#232323 ctermfg=69  ctermbg=235
 hi Boolean      guifg=#A06CFF guibg=#232323 ctermfg=63  ctermbg=235
 hi String       guifg=#3AFFEA guibg=#232323 ctermfg=51  ctermbg=235
