@@ -86,7 +86,11 @@ if has('gui_running')
     colorscheme scheme
 
     " @Todo: Fix this for Windows
-    set guifont=Ubuntu\ Mono\ 12
+    if has('win32')
+        set guifont=Ubuntu_Mono:h12:cANSI:qDRAFT
+    else
+        set guifont=Ubuntu\ Mono\ 12
+    endif
 
     " Only open when in GVim
     vsplit
