@@ -41,6 +41,7 @@ set whichwrap+=<,>,h,l
 set smartcase
 set magic
 
+set incsearch
 set hlsearch
 set showmatch
 set lazyredraw
@@ -48,9 +49,8 @@ set lazyredraw
 set mat=2
 
 " Remove bell noises
-set noerrorbells
-set novisualbell
-set t_vb=
+set noeb vb t_vb=
+au GUIEnter * set visualbell t_vb=
 set tm=500
 
 try
@@ -85,9 +85,9 @@ if has('gui_running')
     set t_Co=256
     colorscheme scheme
 
-    " @Todo: Fix this for Windows
     if has('win32')
-        set guifont=Ubuntu_Mono:h12:cANSI:qDRAFT
+        set guifont=Ubuntu_Mono:h14:cANSI:qDRAFT
+        set rop=type:directx
     else
         set guifont=Ubuntu\ Mono\ 12
     endif
@@ -117,9 +117,9 @@ set cino=l1
 set shiftwidth=4
 set tabstop=4
 
-" Line wrapping on 500 characters
+" Line wrapping on 80 characters
 set lbr
-set tw=500
+set tw=80
 
 " Auto indent, Smart indent and line wrapping
 set ai

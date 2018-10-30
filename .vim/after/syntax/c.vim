@@ -22,7 +22,8 @@ syn keyword cStorageClass local
 " Cast keyword
 syn keyword cStatement cast
 syn keyword cStatement Assert
+syn keyword cStatement ArrayCount
 
 " Highlight @ notes in comments
-syn match cTodo "@\(Todo\|Note\|Redundant\|Optimise\|Fix\|Debug\|Leak\|Cleanup\|Temporary\)\(([A-z ]\+):\)\?:\?"
+syn match cTodo "@[A-Z][a-z]\+\(([A-Z][a-z]\+)\)\?:"
 
