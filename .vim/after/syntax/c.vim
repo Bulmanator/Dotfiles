@@ -23,6 +23,7 @@ syn keyword cStorageClass local
 syn keyword cStatement cast
 syn keyword cStatement Assert
 syn keyword cStatement ArrayCount
+syn keyword cStatement Swap
 
 " Highlight @ notes in comments
 syn match cTodo "@[A-Z][a-z]\+\(([A-Z][a-z]\+)\)\?:"

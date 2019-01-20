@@ -5,11 +5,6 @@ set history=500
 " Automatically reload file if changed externally
 set autoread
 
-if !has('gui_running')
-    " Make Alt key work in URxvt
-    set termencoding=latin1
-endif
-
 " Leader commands, fast saving with ,w in normal mode
 let mapleader = ","
 let g:mapleader = ","
@@ -56,7 +51,7 @@ set tm=500
 try
     " Disable Tab line
     set showtabline=0
-    set switchbuf=useopen,vsplit
+    set switchbuf=useopen
 catch
 endtry
 
@@ -86,14 +81,20 @@ if has('gui_running')
     colorscheme scheme
 
     if has('win32')
+        " clang-cl error format for quickfix
+        set errorformat=%f(%l\\,%c):\ \ %m,%-G%m
         set guifont=Ubuntu_Mono:h14:cANSI:qDRAFT
         set rop=type:directx
     else
+        " @Todo: Check quickfix and make building works on macOS and Linux
         set guifont=Ubuntu\ Mono\ 12
     endif
 
     " Only open when in GVim
     vsplit
+else
+    " Make Alt key work in URxvt
+    set termencoding=latin1
 endif
 
 set encoding=utf8
@@ -107,6 +108,8 @@ set nowb
 set expandtab
 set smarttab
 
+autocmd FileType make setlocal noexpandtab
+
 " File type indentation
 filetype indent on
 
@@ -119,12 +122,13 @@ set tabstop=4
 
 " Line wrapping on 80 characters
 set lbr
-set tw=80
+set tw=110
 
 " Auto indent, Smart indent and line wrapping
 set ai
 set si
-set wrap
+
+set nowrap
 
 " Trim trailing whitespace when saving
 autocmd FileType c,cpp,java,python autocmd BufWritePre <buffer> %s/\s\+$//e 
@@ -141,6 +145,11 @@ map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
+
+" Build command and quickfix manipulation
+nnoremap <F5> :silent make\|cw<enter>
+command! Cnext try <bar> cnext <bar> catch <bar> cfirst <bar> catch <bar> endtry
+nmap <C-n> :Cnext<cr>
 
 " Close one buffer or all buffers
 map <leader>bd :bd<cr>
