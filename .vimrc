@@ -9,8 +9,6 @@ set autoread
 let mapleader = ","
 let g:mapleader = ","
 
-nmap <leader>w :w!<CR>
-
 " UI Configuration
 set ruler
 set cmdheight=1
@@ -22,10 +20,20 @@ set number
 " Split into right side buffer and keep vsplits the same size
 set splitright
 autocmd VimResized * wincmd =
+autocmd GUIEnter * wincmd =
+
+" Platform Stuff
+if has('win32')
+    let g:PlatformPrefix = 'Win'
+elseif has('macunix')
+    let g:PlatformPrefix = 'Mac'
+elseif has('unix')
+    let g:PlatformPrefix = 'Linux'
+endif
 
 " Hide the wildmenu
 set completeopt=preview
-set wildmode=longest,full
+set wildmode=full
 set wildmenu
 
 " Configure backspace to act correctly
@@ -38,22 +46,17 @@ set magic
 
 set incsearch
 set hlsearch
-set showmatch
 set lazyredraw
 
-set mat=2
+set showmatch
+set matchtime=2
 
 " Remove bell noises
 set noeb vb t_vb=
 au GUIEnter * set visualbell t_vb=
-set tm=500
-
-try
-    " Disable Tab line
-    set showtabline=0
-    set switchbuf=useopen
-catch
-endtry
+" Disable Tab line
+set showtabline=0
+set switchbuf=useopen
 
 " Status bar
 set laststatus=2
@@ -82,9 +85,9 @@ if has('gui_running')
 
     if has('win32')
         " clang-cl error format for quickfix
-        set errorformat=%f(%l\\,%c):\ \ %m,%-G%m
-        set guifont=Ubuntu_Mono:h14:cANSI:qDRAFT
-        set rop=type:directx
+        set errorformat=%f(%l\\,%c):\ \ %trror:\ %m,%f(%l\\,%c):\ \ %tarning:\ %m,%-G%m
+        set guifont=Ubuntu_Mono:h14:cANSI,qDRAFT
+        set rop=type:directx,gamma:1.0,contrast:0.5,level:1,geom:1,renmode:4,taamode:1
     else
         " @Todo: Check quickfix and make building works on macOS and Linux
         set guifont=Ubuntu\ Mono\ 12
@@ -104,11 +107,8 @@ set ffs=unix,dos,mac
 set nobackup
 set nowb
 
-" Tabs and Indentation
-set expandtab
-set smarttab
-
 autocmd FileType make setlocal noexpandtab
+autocmd BufEnter *.prj setlocal filetype=vim
 
 " File type indentation
 filetype indent on
@@ -117,57 +117,80 @@ filetype indent on
 set cino=l1
 
 " 1 Tab = 4 Spaces
+" Auto indent, Smart indent and line wrapping
+" Tabs and Indentation
 set shiftwidth=4
 set tabstop=4
-
-" Line wrapping on 80 characters
-set lbr
-set tw=110
-
-" Auto indent, Smart indent and line wrapping
 set ai
 set si
+set expandtab
+set smarttab
 
-set nowrap
+set tw=110
+set wrap linebreak nolist
+" For some reason this is required for nowrap to work properly
+autocmd BufEnter * setlocal nowrap
 
 " Trim trailing whitespace when saving
 autocmd FileType c,cpp,java,python autocmd BufWritePre <buffer> %s/\s\+$//e 
 
 " Keybindings
-map <space> /
-map <c-space> ?
+nnoremap <space> /
+nnoremap <c-space> ?
 
 " Remove search highlighting
-map <silent> <leader><cr> :noh<cr>
+nnoremap <silent> <leader><cr> :noh<cr>
 
 " Switch windows
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
+nnoremap <C-W> <C-W>w
 
-" Build command and quickfix manipulation
-nnoremap <F5> :silent make\|cw<enter>
+" Print out an error message that doesn't spam to the console
+function! PrintError(msg) abort
+    echohl ErrorMsg
+    echomsg a:msg
+    echohl None
+endfunction
+
+" Project file loading and custom make command
+function! Make()
+    if exists('g:ProjectName')
+        let l:UpperProjectName = toupper(g:ProjectName)
+        silent exe "make PROJECT=" . g:ProjectName . " UPPER_PROJECT=" . l:UpperProjectName . " BUILD_DIR=" . g:BuildDir
+        cw
+    else
+        call PrintError("No Project Loaded")
+    endif
+endfunction
+
+command! LoadProject try <bar> so *.prj <bar> catch <bar> call PrintError("No Project File Found") <bar> endtry
+nnoremap <F4> :LoadProject<cr>
+nnoremap <F5> :call Make()<cr>
+
+" Cycle through error messages with quickfix
 command! Cnext try <bar> cnext <bar> catch <bar> cfirst <bar> catch <bar> endtry
-nmap <C-n> :Cnext<cr>
+nnoremap <C-n> :Cnext<cr>
 
-" Close one buffer or all buffers
-map <leader>bd :bd<cr>
-map <leader>ba :bufdo bd<cr>
+" Jump via paragraph
+nnoremap <C-j> }
+nnoremap <C-k> {
 
-" Cycle through buffers
-map <leader>l :bnext<cr>
-map <leader>h :bprevious<cr>
+nnoremap <M-j> mz:m+<cr>
+nnoremap <M-k> mz:m-2<cr>
 
-" Jump via white space
-nmap <C-j> }
-nmap <C-k> {
+vnoremap <M-j> mz:m+<cr>
+vnoremap <M-k> mz:m-2<cr>
 
-nmap <M-j> mz:m+<cr>
-nmap <M-k> mz:m-2<cr>
+nnoremap <Tab> >>
+nnoremap <S-Tab> <<
 
-vmap <M-j> mz:m+<cr>
-vmap <M-k> mz:m-2<cr>
+vnoremap <Tab> >
+vnoremap <S-Tab> <
+
+vnoremap > <Nop>
+vnoremap < <Nop>
+
+" Disable single character delete so I get out of the habit of using it
+nnoremap x <Nop>
 
 " Autocomplete with Tab
 function! TabAutocomplete()
@@ -178,5 +201,4 @@ function! TabAutocomplete()
     endif
 endfunction
 inoremap <Tab> <C-R>=TabAutocomplete()<CR>
-set dictionary="/usr/share/dict/words"
 
