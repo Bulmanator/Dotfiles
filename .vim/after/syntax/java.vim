@@ -1,3 +1,1 @@
-syn match javaTodo "@\(Todo\|Note\|Redundant\|Optimise\|Fix\|Debug\|Leak\)\(([A-z ]\+):\)\?:\?"
-
-set cinoptions=l1
+syn match javaTodo "@[A-Z][a-z]\+\(([A-Z][a-z]\+)\)\?:"
