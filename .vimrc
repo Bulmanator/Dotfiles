@@ -42,6 +42,16 @@ function! ToggleSplit()
     wincmd p
 endfunction
 
+function! SwitchFile()
+    let l:extension = expand('%:e')
+    let l:name = expand('%:r')
+    if l:extension =~ 'cpp'
+        execute ":e " . l:name . ".h"
+    elseif l:extension =~ 'h'
+        execute ":e " . l:name . ".cpp"
+    endif
+endfunction
+
 command! CNext try <bar> cnext <bar> catch <bar> try <bar> cfirst <bar> catch <bar> call PrintError("No Errors") <bar> endtry <bar> endtry
 command! LoadProject try <bar> so *.prj <bar> catch <bar> call PrintError("No project file found") <bar> endtry
 command! Make if exists('g:ProjectName') <bar> silent exe "make" <bar> cw <bar> else <bar> call PrintError("No project loaded") <bar> endif
@@ -78,7 +88,7 @@ nnoremap <c-w> :wincmd w<cr>
 
 " Swap current line
 nnoremap <m-j> mz:m+<cr>
-nnoremap <m-k> mz:m-<cr>
+nnoremap <m-k> mz:m-2<cr>
 
 " Un/indentation with tab
 nnoremap <tab> >>
@@ -133,6 +143,8 @@ set shiftwidth=4
 set tabstop=4
 set textwidth=0
 set wrapmargin=0
+set breakindentopt=shift:4
+set showbreak=...
 set backspace=eol,start,indent
 set whichwrap=b,s,<,>,h,l
 set completeopt=preview
@@ -141,6 +153,8 @@ set wildmenu
 set autoread
 set number
 set ruler
+set termguicolors
+set breakindent
 set lazyredraw
 set splitright
 set cursorline
@@ -156,24 +170,24 @@ set linebreak
 set nolist
 set hid
 
-" Enable syntax highlighting
-syntax on
-if has('gui_running')
-    colorscheme scheme
-else
-    " @Note: This is required for terminals to obey the alt/meta keybinds
-    set termencoding=latin-1
-endif
-
-" Error format for clang
-" @Todo: Linking errors? They aren't consistent though
-set errorformat=%f:%l:%c:\ %trror:\ %m,%f:%l:%c:\ fatal\ %rror:\ %m,%f:%l:%c:\ %tarning:\ %m,%-G%m
-
 " Searching options
 set incsearch
 set hlsearch
 set smartcase
 set magic
+
+set noeb vb t_vb=
+set guioptions=ag
+set showtabline=0
+set switchbuf=useopen,vsplit
+
+" Enable syntax highlighting
+syntax on
+colorscheme schemev2
+
+" Error format for clang
+" @Todo: Linking errors? They aren't consistent though
+set errorformat=%f:%l:%c:\ %trror:\ %m,%f:%l:%c:\ fatal\ %trror:\ %m,%f:%l:%c:\ %tarning:\ %m,%-G%m
 
 " Misc gui options
 " Make sure all splits stay equal size and disable audio and visual bells
@@ -185,10 +199,6 @@ autocmd FileType make setlocal noexpandtab
 autocmd BufEnter *.prj setlocal filetype=vim
 autocmd BufWritePre * call StripTrailingWhitespace()
 filetype indent on
-set noeb vb t_vb=
-set guioptions=ag
-set showtabline=0
-set switchbuf=useopen,vsplit
 
 " Status bar at the bottom of open files
 set laststatus=2

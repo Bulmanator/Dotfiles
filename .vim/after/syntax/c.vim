@@ -10,7 +10,7 @@ syn keyword cStorageClass global
 syn keyword cStorageClass internal
 syn keyword cStorageClass local
 
-" Various extra statement keywords
+" Various Keywords to match
 syn keyword cStatement cast
 syn keyword cStatement Assert
 syn keyword cStatement ArrayCount
@@ -18,5 +18,13 @@ syn keyword cStatement Swap
 syn keyword cStatement OffsetOf
 
 " Highlight @ notes in comments
-syn match cTodo "@[A-Z][a-z]\+\(([A-Z][a-z]\+)\)\?:"
+syn clear cTodo
+syn match cTodo "@\I\i*\((\I\i*)\)\=:"
+
+" Function highlighting
+syn match cFunction /\I\i*(/me=e-1
+hi def link cFunction Function
+
+" So preprocessor stuff doesn't highlight weird when highlighting functions
+syn cluster cPreProcGroup add=cFunction
 
