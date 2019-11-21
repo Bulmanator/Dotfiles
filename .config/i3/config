@@ -10,7 +10,7 @@ set $mod Mod4
 font pango:Noto Sans CJK JP 11
 
 # Start terminal
-bindsym $mod+Return exec --no-startup-id urxvt --meta8
+bindsym $mod+Return exec --no-startup-id gnome-terminal
 
 # Kill focused window
 bindsym $mod+Shift+q kill
@@ -57,7 +57,7 @@ floating_modifier $mod
 bindsym $mod+Shift+space floating toggle
 
 # Lock screen
-bindsym $mod+Shift+x exec --no-startup-id wal-lock
+bindsym $mod+Shift+x exec --no-startup-id lock
 
 # Workspace Names
 set $ws1 1: Internet
@@ -204,15 +204,12 @@ bindsym Print exec --no-startup-id scrot ~/Pictures/Screenshots/%Y-%m-%d-%T.png
 bindsym Mod1+Sys_Req exec --no-startup-id scrot -u ~/Pictures/Screenshots/%Y-%m-%d-%T.png
 
 # Polybar
-exec_always --no-startup-id $HOME/.config/polybar/launch
+exec_always --no-startup-id $HOME/.config/polybar/launch &
 
 # Keep system awake if fullscreen app is focused
 exec --no-startup-id setsid wakeup 550 >/dev/null 2>&1 < /dev/null &
 
 # Launch programs
-exec --no-startup-id megasync
-exec --no-startup-id quodlibet
-exec --no-startup-id spotify
 exec --no-startup-id redshift
 
 # Startup options

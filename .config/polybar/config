@@ -234,7 +234,7 @@ label-mounted = Home: %percentage_used%%
 type = internal/temperature
 interval = 10
 
-hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon2/temp1_input
+hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon6/temp1_input
 warn-temperature = 80
 
 ramp-0 = " "
@@ -250,8 +250,8 @@ format-underline = ${colours.colour13}
 format-warn = <ramp> <label-warn>
 format-warn-underline = #F00
 
-label = %temperature%
-label-warn = %temperature%
+label = %temperature-c%
+label-warn = %temperature-c%
 label-warn-foreground = ${colours.colour3}
 
 

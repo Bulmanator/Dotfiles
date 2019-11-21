@@ -33,8 +33,6 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
 fi
 
 # Run Programs
-
-wal -R &
-wal-lock &
-(sleep 10; ~/.config/polybar/launch) &
+wal -R
+lock &
 exec i3
