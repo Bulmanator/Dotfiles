@@ -53,8 +53,9 @@ function! SwitchFile()
 endfunction
 
 command! CNext try <bar> cnext <bar> catch <bar> try <bar> cfirst <bar> catch <bar> call PrintError("No Errors") <bar> endtry <bar> endtry
-command! LoadProject try <bar> so *.prj <bar> catch <bar> call PrintError("No project file found") <bar> endtry
-command! Make if exists('g:ProjectName') <bar> silent exe "make" <bar> cw <bar> else <bar> call PrintError("No project loaded") <bar> endif
+command! CPrev try <bar> cprev <bar> catch <bar> try <bar> clast <bar> catch <bar> call PrintError("No Errors") <bar> endtry <bar> endtry
+command! LoadProject try <bar> args *.h *.cpp <bar> catch <bar> call PrintError("Failed to open code") <bar> endtry
+command! Make silent exe "make" <bar> cw
 
 " Keybindings
 
@@ -98,8 +99,9 @@ vnoremap <s-tab> <
 vnoremap > <nop>
 vnoremap < <nop>
 
-" Errors
-nnoremap e :CNext<cr>
+" Scroll through errors with []
+nnoremap [ :CPrev<cr>
+nnoremap ] :CNext<cr>
 
 " Auto-complete on tab
 inoremap <tab> <c-r>=TabCompleteWord()<cr>
@@ -109,12 +111,12 @@ nnoremap b :call ToggleSplit()<cr>
 
 " Platform specific options
 if has('win32')
-    let g:PlatformPrefix = "Windows"
+    let g:PlatformPrefix = "Win"
     set guifont=Ubuntu_Mono:h14:cANSI,qDRAFT
     set rop=type:directx,gamma:1.0,contrast:0.5,level:1,geom:1,renmode:4,taamode:1
-    set makeprg=./windows.build
+    set makeprg=build.bat
 elseif has('macunix')
-    let g:PlatformPrefix = "Macos"
+    let g:PlatformPrefix = "Mac"
     set guifont=Ubuntu\ Mono\ 12
     set mousemodel=popup
     set makeprg=./macos.build
@@ -123,7 +125,6 @@ elseif has('unix')
     set guifont=Ubuntu\ Mono\ 12
     set mousemodel=popup
     set makeprg=./linux.build
-    set clipboard=unnamedplus
 endif
 
 " Basic options
@@ -132,6 +133,7 @@ endif
 set cinoptions=l1,b-s
 set cinkeys+=0=break
 
+set clipboard=unnamedplus
 set history=500
 set cmdheight=1
 set mouse=a
@@ -183,10 +185,10 @@ set switchbuf=useopen,vsplit
 
 " Enable syntax highlighting
 syntax on
-colorscheme schemev2
+colorscheme scheme
 
 " Error format for clang
-" @Todo: Linking errors? They aren't consistent though
+" @Todo: make errorformat for msvc
 set errorformat=%f:%l:%c:\ %trror:\ %m,%f:%l:%c:\ fatal\ %trror:\ %m,%f:%l:%c:\ %tarning:\ %m,%-G%m
 
 " Misc gui options

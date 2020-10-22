@@ -1,6 +1,7 @@
 " Custom typenames
 syn keyword cType s8 s16 s32 s64
 syn keyword cType u8 u16 u32 u64
+syn keyword cType b32
 syn keyword cType f32 f64
 syn keyword cType umm smm
 syn keyword cType string
@@ -27,4 +28,3 @@ hi def link cFunction Function
 
 " So preprocessor stuff doesn't highlight weird when highlighting functions
 syn cluster cPreProcGroup add=cFunction
-

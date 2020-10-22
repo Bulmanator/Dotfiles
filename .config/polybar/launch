@@ -10,8 +10,9 @@ while pgrep -x polybar > /dev/null; do sleep 1; done
 if [ "$HOSTNAME" == "Kanto" ]
 then
     # Running on desktop
-    polybar DesktopLeft &
-    polybar DesktopRight &
+    polybar -c "$HOME/.config/polybar/kanto.config" kanto_left  &
+    polybar -c "$HOME/.config/polybar/kanto.config" kanto_middle &
+    polybar -c "$HOME/.config/polybar/kanto.config" kanto_right &
 elif [ "$HOSTNAME" == "Tokyo" ]
 then
     # Running on Laptop
@@ -20,5 +21,9 @@ else
     echo "Unknown Device!"
 fi
 
+if [[ -f "$HOME/.fehbg" ]];
+then
+    "$HOME/.fehbg"
+fi
 
 echo "Bars Launched!"
