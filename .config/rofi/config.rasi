@@ -1,0 +1,17 @@
+// Rofi configuration
+
+configuration {
+    modi: "window,drun,ssh";
+    font: "Ubuntu Mono 12";
+    show-icons: false;
+    lines: 1;
+    width: 99; // @Note: Was 95 for polybar
+    location: 2;
+    yoffset: 33;
+    icon-theme: "Numix-Circle";
+    drun-match-fields: "name,exec";
+    drun-display-format: "{name}";
+    display-drun: "Launch";
+    threads: 2;
+    theme: "theme";
+}

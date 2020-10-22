@@ -7,34 +7,47 @@ endif
 
 let g:colors_name = "scheme"
 
-" Layout
+"
 " hi Example guifg=NONE guibg=NONE gui=NONE ctermfg=NONE ctermbg=NONE cterm=NONE
+"
 
-hi Normal       guifg=#FFFFFF guibg=#232323 ctermfg=white ctermbg=235
+hi Normal       guifg=#FFFFFF guibg=#232323
+hi NonText      guifg=#FFFFFF guibg=#232323
 
-hi LineNr       guifg=#C8C8C8 guibg=#111111 ctermfg=243 ctermbg=233
-hi EndOfBuffer  guifg=#FFFFFF guibg=#232323 ctermfg=white ctermbg=235
+hi LineNr       guifg=#FFFFFF guibg=#18171C
+hi VertSplit    guifg=#FFFFFF
 
-hi VertSplit    guibg=#FFFFFF guifg=#232323 ctermfg=white ctermbg=235
+hi CursorLineNr guifg=#FFFFFF guibg=#292931 cterm=NONE
+hi CursorLine   guibg=#18171C gui=NONE      cterm=NONE
 
-hi CursorLineNr guibg=#232323 guifg=#FFFFFF gui=bold ctermfg=235 ctermbg=white cterm=bold
-hi CursorLine   guibg=#555555 ctermbg=122 gui=None
+hi WildMenu     guifg=#FFFFFF
+hi WarningMsg   guifg=#EE6C4D
+hi ErrorMsg     guifg=#E84855 guibg=#232323
 
-hi WildMenu     guifg=#FFFFFF guibg=#232323 gui=bold ctermfg=white ctermbg=235 cterm=bold
-hi WarningMsg   guifg=#FFFF00 guibg=#232323 gui=bold ctermfg=226 ctermbg=235 cterm=bold
+hi Comment      guifg=#F9DC5C
 
-hi Comment      guifg=#FFFF00 guibg=#232323 ctermfg=226 ctermbg=235
-hi PreProc      guifg=#FF6600 guibg=#232323 ctermfg=208 ctermbg=235
+" @Note: This highlights the background colour incorrectly when the cursor is
+" on the same line, but there isn't really much I can do about that because it
+" highlights the background colour bright yellow if 'guibg' is not set
+hi Todo         guifg=#E84855 guibg=#232323
 
-hi Statement    guifg=#66FF99 guibg=#232323 ctermfg=47  ctermbg=235
-hi Type         guifg=#4FDEAF guibg=#232323 gui=NONE    ctermfg=49 ctermbg=235 cterm=NONE
-hi Typedef      guifg=#4FDE59 guibg=#232323 ctermfg=41  ctermbg=235
-hi StorageClass guifg=#4FDE59 guibg=#232323 ctermfg=41  ctermbg=235
-hi Constant     guifg=#66CCFF guibg=#232323 ctermfg=69  ctermbg=235
-hi Boolean      guifg=#A06CFF guibg=#232323 ctermfg=63  ctermbg=235
-hi String       guifg=#3AFFEA guibg=#232323 ctermfg=51  ctermbg=235
-hi Character    guifg=#3AFFEA guibg=#232323 ctermfg=51  ctermbg=235
-hi Search       guifg=#232323 guibg=#71DFFF ctermfg=235 ctermbg=81
-hi Todo         guifg=#FF3737 guibg=#232323 gui=bold ctermfg=196 ctermbg=235 cterm=bold
-hi SpecialChar  guifg=#7359E5 guibg=#232323 ctermfg=63 ctermbg=235
+hi PreProc      guifg=#EE6C4D
+
+hi Statement    guifg=#FFE74C gui=BOLD cterm=BOLD
+
+hi Type         guifg=#96BBBB gui=NONE cterm=NONE
+hi Typedef      guifg=#8D99AF
+hi StorageClass guifg=#8D99AF
+
+hi Function     guifg=#FF5866
+hi Identifier   guifg=#96BBBB
+
+hi Constant     guifg=#7BB1FD
+hi Boolean      guifg=#7BB1FD
+hi String       guifg=#3185FC
+hi Character    guifg=#3185FC
+hi SpecialChar  guifg=#EE6C4D
+
+hi Search       guifg=#232323 guibg=#FFC7A2
+
 

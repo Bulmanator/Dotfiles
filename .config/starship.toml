@@ -1,0 +1,42 @@
+add_newline = false
+scan_timeout = 10
+format = "\\[$username$hostname\\] :: $directory$git_branch$git_status $cmd_duration$character"
+
+[line_break]
+disabled = true
+
+[hostname]
+ssh_only = false
+style = "bright-blue bold"
+format = "[@$hostname]($style)"
+
+[username]
+show_always = true
+style_user = "bright-blue bold"
+style_root = "bright-red bold"
+format="[$user]($style)"
+
+[git_branch]
+format = " [\\($branch\\)](bold yellow)"
+
+[git_status]
+untracked = "?"
+modified = "!"
+staged = "[+](green)"
+format = "([\\[$untracked$modified$staged\\]](bold red))"
+
+[directory]
+truncation_length = 3
+truncate_to_repo  = true
+style = "blue"
+read_only = "!"
+ready_only_style = "red"
+format = "[$path]($style)[$read_only]($read_only_style)"
+
+[cmd_duration]
+style = "bold yellow"
+format = "[+$duration]($style) "
+
+[character]
+success_symbol = "[>](cyan bold)"
+error_symbol   = "[>](red bold)"
