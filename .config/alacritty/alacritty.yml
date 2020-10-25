@@ -10,22 +10,21 @@ font:
         family: "Ubuntu Mono"
 
 # Color scheme. Based off nvim colour scheme
-# @Note: 'bright' and 'dim' colours are calculated automatically
 colors:
     primary:
         background: '#181818'
         foreground: '#FFFFFF'
 
     cursor:
-        text:   '#232323'
+        text:   '#181818'
         cursor: '#FFFFFF'
 
     selection:
-        text:   '#232323'
+        text:   '#181818'
         cursor: '#FFFFFF'
 
     normal:
-        black:   '#000000'
+        black:   '#181818'
         red:     '#FF5866'
         green:   '#85FF85'
         yellow:  '#F9DC5C'
@@ -33,3 +32,23 @@ colors:
         magenta: '#FF85FF'
         cyan:    '#85FFFF'
         white:   '#FFFFFF'
+
+    bright:
+        black:   '#252525'
+        red:     '#FF99A1'
+        green:   '#C2FFC2'
+        yellow:  '#FCEEB0'
+        blue:    '#86B8FD'
+        magenta: '#FFC2FF'
+        cyan:    '#C2FFFF'
+        white:   '#FFFFFF'
+
+    dim:
+        black:   '#000000'
+        red:     '#F50014'
+        green:   '#5CFF5C'
+        yellow:  '#F6CD13'
+        blue:    '#0567F1'
+        magenta: '#FF5CFF'
+        cyan:    '#00F5F5'
+        white:   '#C2C2C2'

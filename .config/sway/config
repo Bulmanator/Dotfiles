@@ -16,14 +16,15 @@ set $menu rofi -modi drun -show
 output * bg ~/Pictures/Backgrounds/between_the_twin_cities_by_piglizard47-d6dgwve.jpg fill
 
 # Setup displays
-output DP-1 position 0,0 mode 1920x1080@60Hz
+output DVI-D-1 position 0,0 mode 1920x1080@60Hz
 
 output DP-2 mode 3840x2160@60Hz scale 2
 output DP-2 adaptive_sync on
 focus output DP-2
 
-output DVI-D-1 mode 1920x1080@144Hz
+output DP-1 mode 1920x1080@144Hz
 
+# From left to right
 set $mon1 DVI-D-1
 set $mon2 DP-2
 set $mon3 DP-1
@@ -41,16 +42,15 @@ set $ws9  9
 set $ws10 10
 
 # Send specific workspaces to specific displays
-workspace "$ws2"  output $mon1
-workspace "$ws7"  output $mon1
+workspace "$ws1"  output $mon1
 workspace "$ws9"  output $mon1
 workspace "$ws10" output $mon1
 
 workspace "$ws3" output $mon2
 workspace "$ws8" output $mon2
 
-workspace "$ws1" output $mon3
 workspace "$ws2" output $mon3
+workspace "$ws7" output $mon3
 
 # Set input to be UK keyboard layout and use caps as escape for vim
 input "type:keyboard" {
