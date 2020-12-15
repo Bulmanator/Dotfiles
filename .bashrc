@@ -14,6 +14,10 @@ shopt -s histappend
 LESSHISTFILE="-"
 export LESSHISTFILE
 
+# Editor use nvim
+EDITOR=nvim
+export EDITOR
+
 # Misc options
 shopt -s checkwinsize
 shopt -s globstar
@@ -49,6 +53,12 @@ then
     . "/etc/profile.d/devkit-env.sh"
 fi
 
-# Starship prompt
 # @Note: Make sure this is at the end of the file
-eval "$(starship init bash)"
+# Setup prompt, if starship is available use that, otherwise fallback to standard PS1
+if command -v starship &> /dev/null
+then
+    eval "$(starship init bash)"
+else
+    PS1="[\033[01;94m\u@\h\033[00m] :: \033[00;34m\w \033[01;36m> \033[0;0m"
+    export PS1
+fi

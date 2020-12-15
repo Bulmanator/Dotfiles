@@ -13,7 +13,7 @@ set $term alacritty
 set $menu rofi -modi drun -show
 
 # Set background
-output * bg ~/Pictures/Backgrounds/between_the_twin_cities_by_piglizard47-d6dgwve.jpg fill
+output * bg ~/Pictures/Backgrounds/40417845223_45b71c8904_o_4k.jpg fill
 
 # Setup displays
 output DVI-D-1 position 0,0 mode 1920x1080@60Hz
