@@ -26,6 +26,11 @@ hi ErrorMsg     guifg=#E84855 guibg=#232323
 
 hi Comment      guifg=#F9DC5C
 
+hi StatusLine   guibg=#18171C gui=BOLD
+hi StatusLineNC guibg=#18171C gui=BOLD
+
+hi VertSplit    guifg=#18171C guibg=#18171C gui=NONE
+
 " @Note: This highlights the background colour incorrectly when the cursor is
 " on the same line, but there isn't really much I can do about that because it
 " highlights the background colour bright yellow if 'guibg' is not set

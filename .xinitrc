@@ -38,4 +38,5 @@ then
     unset f
 fi
 
+setxkbmap -option caps:swapescape
 exec bspwm

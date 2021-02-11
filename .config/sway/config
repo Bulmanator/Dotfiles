@@ -15,19 +15,18 @@ set $menu rofi -modi drun -show
 # Set background
 output * bg ~/Pictures/Backgrounds/40417845223_45b71c8904_o_4k.jpg fill
 
-# Setup displays
-output DVI-D-1 position 0,0 mode 1920x1080@60Hz
-
-output DP-2 mode 3840x2160@60Hz scale 2
-output DP-2 adaptive_sync on
-focus output DP-2
-
-output DP-1 mode 1920x1080@144Hz
-
 # From left to right
 set $mon1 DVI-D-1
-set $mon2 DP-2
-set $mon3 DP-1
+set $mon2 DP-1
+set $mon3 DP-2
+
+# Setup displays
+output $mon1 position 0,0 mode 1920x1080@60Hz
+
+output $mon2 position 1920,0 mode 3840x2160@60Hz scale 2 adaptive_sync on
+focus output $mon2
+
+output $mon3 position 3840,0 mode 1920x1080@144Hz
 
 # Workspace names. Numbers will be stripped when displaying
 set $ws1  1
