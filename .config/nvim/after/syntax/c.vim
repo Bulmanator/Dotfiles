@@ -20,7 +20,11 @@ syn keyword cStatement OffsetOf
 
 " Highlight @ notes in comments
 syn clear cTodo
-syn match cTodo "@\I\i*\((\I\i*)\)\=:"
+syn match cTodo "@\I\i*\((\I\i*)\)\=:" contained
+
+" Highlight notes in comments
+syn match cNote ":\I\i*" contained
+syn cluster cCommentGroup add=cNote
 
 " Function highlighting
 syn match cFunction /\I\i*(/me=e-1

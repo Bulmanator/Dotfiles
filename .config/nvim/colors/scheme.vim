@@ -35,6 +35,7 @@ hi VertSplit    guifg=#18171C guibg=#18171C gui=NONE
 " on the same line, but there isn't really much I can do about that because it
 " highlights the background colour bright yellow if 'guibg' is not set
 hi Todo         guifg=#E84855 guibg=#232323
+hi cNote        guifg=#35FF77 guibg=NONE
 
 hi PreProc      guifg=#EE6C4D
 

@@ -112,8 +112,6 @@ nnoremap b :call ToggleSplit()<cr>
 " Platform specific options
 if has('win32')
     let g:PlatformPrefix = "Win"
-    set guifont=Ubuntu_Mono:h14:cANSI,qDRAFT
-    set rop=type:directx,gamma:1.0,contrast:0.5,level:1,geom:1,renmode:4,taamode:1
     set makeprg=build.bat
 elseif has('macunix')
     let g:PlatformPrefix = "Mac"
