@@ -53,6 +53,9 @@ then
     . "/etc/profile.d/devkit-env.sh"
 fi
 
+# Apparently this is needed for passphrase input with gpg
+export GPG_TTY=$(tty)
+
 # @Note: Make sure this is at the end of the file
 # Setup prompt, if starship is available use that, otherwise fallback to standard PS1
 if command -v starship &> /dev/null

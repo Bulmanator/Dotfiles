@@ -8,5 +8,11 @@ then
     export MOZ_ENABLE_WAYLAND=1
     export QT_QPA_PLATFORM=wayland-egl
 
-    exec sway
+    if [ "$HOSTNAME" == "Kanto" ];
+    then
+        exec sway --config "$HOME/.config/sway/kanto.config"
+    elif [ "$HOSTNAME" == "Tokyo" ];
+    then
+        exec sway --config "$HOME/.config/sway/tokyo.config"
+    fi
 fi

@@ -30,7 +30,7 @@ truncation_length = 3
 truncate_to_repo  = true
 style = "blue"
 read_only = "!"
-ready_only_style = "red"
+read_only_style = "red"
 format = "[$path]($style)[$read_only]($read_only_style)"
 
 [cmd_duration]

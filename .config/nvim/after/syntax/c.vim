@@ -1,9 +1,9 @@
 " Custom typenames
 syn keyword cType s8 s16 s32 s64
 syn keyword cType u8 u16 u32 u64
-syn keyword cType b32
+syn keyword cType b8 b16 b32 b64
 syn keyword cType f32 f64
-syn keyword cType umm smm
+syn keyword cType uptr sptr
 syn keyword cType string
 
 " global, internal and local for static
@@ -14,9 +14,9 @@ syn keyword cStorageClass local
 " Various Keywords to match
 syn keyword cStatement cast
 syn keyword cStatement Assert
-syn keyword cStatement ArrayCount
+syn keyword cStatement ArraySize
 syn keyword cStatement Swap
-syn keyword cStatement OffsetOf
+syn keyword cStatement OffsetTo
 
 " Highlight @ notes in comments
 syn clear cTodo
