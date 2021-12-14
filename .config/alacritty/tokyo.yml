@@ -1,0 +1,54 @@
+# Set $TERM to xterm-256color. The value of 'alacritty' was giving werid results when using ssh
+#
+env:
+    TERM: xterm-256color
+
+# Font using 'Ubuntu Mono' because it looks nice
+font:
+    size: 13.0
+    normal:
+        family: "Ubuntu Mono"
+
+# Color scheme. Based off nvim colour scheme
+colors:
+    primary:
+        background: '#181818'
+        foreground: '#FFFFFF'
+
+    cursor:
+        text:   '#181818'
+        cursor: '#FFFFFF'
+
+    selection:
+        text:   '#181818'
+        cursor: '#FFFFFF'
+
+    normal:
+        black:   '#181818'
+        red:     '#FF5866'
+        green:   '#85FF85'
+        yellow:  '#F9DC5C'
+        blue:    '#3185FC'
+        magenta: '#FF85FF'
+        cyan:    '#85FFFF'
+        white:   '#FFFFFF'
+
+    bright:
+        black:   '#252525'
+        red:     '#FF99A1'
+        green:   '#C2FFC2'
+        yellow:  '#FCEEB0'
+        blue:    '#86B8FD'
+        magenta: '#FFC2FF'
+        cyan:    '#C2FFFF'
+        white:   '#FFFFFF'
+
+    dim:
+        black:   '#000000'
+        red:     '#F50014'
+        green:   '#5CFF5C'
+        yellow:  '#F6CD13'
+        blue:    '#0567F1'
+        magenta: '#FF5CFF'
+        cyan:    '#00F5F5'
+        white:   '#C2C2C2'

@@ -1,0 +1,58 @@
+# Background image
+#
+image=~/Pictures/Backgrounds/M4x8IYX.jpg
+scaling=fill
+
+# Basic options
+#
+font=Noto Sans CJK JP
+font-size=35
+
+ignore-empty-password
+daemonize
+indicator-idle-visible
+indicator-caps-lock
+indicator-radius=100
+indicator-thickness=10
+
+# Segment colours
+#
+key-hl-color=3185FC
+bs-hl-color=86B8FD
+
+caps-lock-key-hl-color=3185FC
+caps-lock-bs-hl-color=86B8FD
+
+separator-color=252525
+
+line-uses-inside
+
+# Normal
+#
+inside-color=181818
+ring-color=252525
+text-color=FFFFFF
+
+# Cleared input
+#
+inside-clear-color=181818
+ring-clear-color=FFFFFF
+text-clear-color=FFFFFF
+
+# Caps lock enabled
+#
+inside-caps-lock-color=181818
+ring-caps-lock-color=252525
+text-caps-lock-color=FFFFFF
+
+# Verifying password
+#
+inside-ver-color=181818
+ring-ver-color=F6CD13
+text-ver-color=FFFFFF
+
+# Incorrect password
+#
+inside-wrong-color=181818
+ring-wrong-color=F50014
+text-wrong-color=FFFFFF

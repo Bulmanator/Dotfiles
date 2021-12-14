@@ -54,13 +54,11 @@ endfunction
 
 command! CNext try <bar> cnext <bar> catch <bar> try <bar> cfirst <bar> catch <bar> call PrintError("No Errors") <bar> endtry <bar> endtry
 command! CPrev try <bar> cprev <bar> catch <bar> try <bar> clast <bar> catch <bar> call PrintError("No Errors") <bar> endtry <bar> endtry
-command! LoadProject try <bar> args *.h *.cpp <bar> catch <bar> call PrintError("Failed to open code") <bar> endtry
 command! Make silent exe "make" <bar> cw
 
 " Keybindings
 
-" Project loading and building
-nnoremap <f4> :LoadProject<cr>
+" Running a build script with F5
 nnoremap <f5> :Make<cr>
 
 " Searching
@@ -69,12 +67,6 @@ nnoremap <space> /
 nnoremap <s-space> :%s/
 vnoremap <s-space> :s/
 nnoremap s :nohl<cr>
-
-" Moving around wrapped lines
-noremap <silent> j gj
-noremap <silent> k gk
-noremap <silent> 0 g0
-noremap <silent> $ g$
 
 " Jumping paragraphs
 " @Note: This also kills two birds with one stone by unmapping the stupid capital letters binds that destroy half your formatting in the event you accidentally turn on caps lock
@@ -111,23 +103,20 @@ nnoremap b :call ToggleSplit()<cr>
 
 " Platform specific options
 if has('win32')
-    let g:PlatformPrefix = "Win"
-    set makeprg=build.bat
+    set makeprg=windows.bat
 elseif has('macunix')
-    let g:PlatformPrefix = "Mac"
     set guifont=Ubuntu\ Mono\ 12
     set mousemodel=popup
-    set makeprg=./macos.build
+    set makeprg=./macos.sh
 elseif has('unix')
-    let g:PlatformPrefix = "Linux"
     set guifont=Ubuntu\ Mono\ 12
     set mousemodel=popup
-    set makeprg=./linux.build
+    set makeprg=./linux.sh
 endif
 
 " Basic options
 
-" @Note: Case statements are a bit screwy with indentation this is the best way I have come up with to get it to work correctly
+" Case statements are a bit screwy with indentation this is the best way I have come up with to get it to work correctly
 set cinoptions=l1,b-s
 set cinkeys+=0=break
 
@@ -165,7 +154,7 @@ set smartindent
 set expandtab
 set smarttab
 set cindent
-set wrap
+set nowrap
 set linebreak
 set nolist
 set hid
@@ -190,14 +179,18 @@ colorscheme scheme
 set errorformat=%f:%l:%c:\ %trror:\ %m,%f:%l:%c:\ fatal\ %trror:\ %m,%f:%l:%c:\ %tarning:\ %m,%-G%m
 
 " Misc gui options
+
 " Make sure all splits stay equal size and disable audio and visual bells
 autocmd VimResized * wincmd =
 autocmd GUIEnter * wincmd = 
 autocmd GUIEnter * set visualbell t_vb=
+
+" Strip trailing whitespace on write
+autocmd BufWritePre * call StripTrailingWhitespace()
+
 autocmd FileType qf wincmd J
 autocmd FileType make setlocal noexpandtab
-autocmd BufEnter *.prj setlocal filetype=vim
-autocmd BufWritePre * call StripTrailingWhitespace()
+
 filetype indent on
 
 " Status bar at the bottom of open files
