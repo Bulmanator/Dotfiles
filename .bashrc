@@ -2,10 +2,10 @@
 [[ $- != *i* ]] && return
 
 # Source aliases
-if [ -f "$HOME/.bash_aliases" ];
-then
-    . "$HOME/.bash_aliases"
-fi
+[[ -f "$HOME/.bash_aliases" ]] && . "$HOME/.bash_aliases"
+
+# Source devkitPro env if available
+[[ -f "/etc/profile.d/devkit-env.sh" ]] && . "/etc/profile.d/devkit-env.sh"
 
 # Enable programmable bash completion
 if ! shopt -oq posix;
@@ -45,16 +45,6 @@ bind 'set mark-symlinked-directories on'
 stty werase undef
 bind '\C-w:unix-filename-rubout'
 
-# Source devkitPro env if available
-if [ -f '/etc/profile.d/devkit-env.sh' ];
-then
-    . '/etc/profile.d/devkit-env.sh'
-fi
-
 # If available setup execute starship prompt, otherwise default to a basic PS1
-if command -v starship &> /dev/null
-then
-    eval "$(starship init bash)"
-else
-    export PS1="[\033[01;94m\u@\h\033[00m] :: \033[00;34m\w \033[01;36m> \033[0;0m"
-fi
+export PS1="[\033[01;92m\u@\h\033[00m] :: \033[00;34m\w \033[01;36m> \033[0;0m"
+[[ $(command -v "starship") ]] && eval "$(starship init bash)"

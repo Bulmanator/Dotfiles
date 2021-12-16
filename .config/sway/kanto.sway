@@ -2,9 +2,9 @@
 # Variables
 #
 
-set $terminal 'alacritty --config-file ~/.config/alacritty/tokyo.yml'
+set $terminal 'alacritty --config-file ~/.config/alacritty/kanto.yml'
 set $launcher 'rofi -show drun'
-set $lockscreen 'swaylock -C ~/.config/swaylock/tokyo.lock'
+set $lockscreen 'swaylock -C ~/.config/swaylock/kanto.lock'
 
 set $mod Mod4
 
@@ -24,7 +24,8 @@ set $ws8  8八
 set $ws9  9九
 set $ws10 10十
 
-set $display eDP-1
+set $display_left  DP-1
+set $display_right DP-2
 
 #
 # Input & keybinds
@@ -88,23 +89,32 @@ bindsym $mod+shift+0        move container to workspace $ws10
 # Visuals
 #
 
-# Set display resolution and refresh rate
+# Set output display for 4k 60Hz (left) and 1080p 144Hz (right) monitors (144Hz doesn't currently work with nouveau)
 #
-output $display position 0,0 mode 1920x1080@60Hz
+output $display_left  position 0,0    mode 3840x2160@60Hz  scale 2
+output $display_right position 1920,0 mode 1920x1080@144Hz
+
+# Send workspaces to specific displays
+#
+workspace $ws3  output $display_left
+
+workspace $ws1  output $display_right
+workspace $ws2  output $display_right
+workspace $ws10 output $display_right
 
 # Set background
 #
-output * bg ~/Pictures/Backgrounds/EcpyQ6LUMAIGkb9.jpg fill
+output * bg ~/Pictures/Backgrounds/40417845223_45b71c8904_o_4k.jpg fill
 
 # Gaps and outline
 #
 gaps inner 10
 default_border pixel 2
 
-# Set colours for windows. tokyo base colour = blue
+# Set colours for windows. kanto base colour = green
 #
-client.focused          #3185FC #181818 #FFFFFF #3185FC #3185FC
-client.focused_inactive #86B8FD #181818 #FFFFFF #86B8FD #86B8FD
+client.focused          #85FF85 #181818 #FFFFFF #85FF85 #85FF85
+client.focused_inactive #C2FFC2 #181818 #FFFFFF #C2FFC2 #C2FFC2
 client.unfocused        #252525 #181818 #FFFFFF #252525 #252525
 
 # Use Noto Sans CJK JP for nice looking Japanese characters
@@ -132,16 +142,16 @@ bar {
         background         #181818
         statusline         #FFFFFF
         separator          #FFFFFF
-        active_workspace   #86B8FD #86B8FD #181818
+        active_workspace   #C2FFC2 #C2FFC2 #181818
         inactive_workspace #181818 #181818 #FFFFFF
-        focused_workspace  #3185FC #3185FC #181818
+        focused_workspace  #85FF85 #85FF85 #181818
     }
 }
 
 # Startup applications
 #
 exec $lockscreen
-exec swayidle -w timeout 300 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' timeout 600 $lockscreen before-sleep $lockscreen
+exec swayidle -w timeout 900 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' timeout 1800 $lockscreen before-sleep $lockscreen
 
 # Import any system level configuration changes
 #

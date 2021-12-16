@@ -10,7 +10,12 @@ then
     export QT_QPA_PLATFORMTHEME=qt5ct
     export SDL_VIDEODRIVER=wayland
 
-    if [ "$HOSTNAME" == "tokyo" ];
+    if [ "$HOSTNAME" == "kanto" ];
+    then
+        # Running on desktop
+        export WLR_NO_HARDWARE_CURSORS=1
+        exec sway --config "$HOME/.config/sway/kanto.sway"
+    elif [ "$HOSTNAME" == "tokyo" ];
     then
         # Running on laptop
         exec sway --config "$HOME/.config/sway/tokyo.sway"
