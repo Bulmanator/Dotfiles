@@ -36,7 +36,9 @@ export LESSHISTFILE="-"
 export EDITOR=nvim
 
 # Required for passphrase input with gpg
-export GPG_TTY=$(tty)
+export GPG_TTY="$(tty)"
+export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+gpg-connect-agent updatestartuptty /bye > /dev/null
 
 # Append / to the end of symlinked directories
 bind 'set mark-symlinked-directories on'

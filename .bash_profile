@@ -14,7 +14,7 @@ then
     then
         # Running on desktop
         export WLR_NO_HARDWARE_CURSORS=1
-        exec sway --config "$HOME/.config/sway/kanto.sway"
+        exec sway --unsupported-gpu --config "$HOME/.config/sway/kanto.sway"
     elif [ "$HOSTNAME" == "tokyo" ];
     then
         # Running on laptop

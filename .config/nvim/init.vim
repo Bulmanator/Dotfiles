@@ -1,7 +1,9 @@
-" Bulmanator's .vimrc
-" Version : 2.0.0
+" bulmanator's .vimrc
+" version : 2.0.0
+"
+" this needs to be re-written slightly
 
-" Functions and custom commands
+" functions and custom commands
 function! PrintError(msg) abort
     echohl ErrorMsg
     echomsg a:msg
@@ -9,7 +11,7 @@ function! PrintError(msg) abort
 endfunction
 
 function! StripTrailingWhitespace()
-    if &ft =~ 'vim' " @Note: More filetypes can be excluded by adding them here
+    if &ft =~ 'vim' " @note: more filetypes can be excluded by adding them here
         return
     endif
     mark `
@@ -17,6 +19,9 @@ function! StripTrailingWhitespace()
     normal ``
 endfunction
 
+" @todo: very tempted to turn this off, it just causes more pain when it
+" inserts the 'incorrect' thing
+"
 function! TabCompleteWord()
     if col('.') > 1 && strpart(getline('.'), col('.') - 2, 3) =~ '^\w'
         return "\<C-P>"
@@ -26,7 +31,7 @@ function! TabCompleteWord()
 endfunction
 
 function! ToggleSplit()
-    " @Note: If this is true the quickfix list is open so we want to ignore it in the count
+    " @note: If this is true the quickfix list is open so we want to ignore it in the count
     if filter(getwininfo(), 'v:val.quickfix || v:val.loclist') != []
         if winnr('$') - 1 > 1
             wincmd o
@@ -52,16 +57,15 @@ function! SwitchFile()
     endif
 endfunction
 
+" @todo: rethink this?
+"
 command! CNext try <bar> cnext <bar> catch <bar> try <bar> cfirst <bar> catch <bar> call PrintError("No Errors") <bar> endtry <bar> endtry
 command! CPrev try <bar> cprev <bar> catch <bar> try <bar> clast <bar> catch <bar> call PrintError("No Errors") <bar> endtry <bar> endtry
 command! Make silent exe "make" <bar> cw
 
-" Keybindings
+" keybindings
 
-" Running a build script with F5
-nnoremap <f5> :Make<cr>
-
-" Searching
+" searching
 nnoremap <space> /
 " @Note: These won't work on terminal because they can't differentiate between shift-space and space
 nnoremap <s-space> :%s/
@@ -101,6 +105,8 @@ inoremap <tab> <c-r>=TabCompleteWord()<cr>
 " Toggle vertical split
 nnoremap b :call ToggleSplit()<cr>
 
+
+
 " Platform specific options
 if has('win32')
     set makeprg=windows.bat
@@ -109,16 +115,18 @@ elseif has('macunix')
     set mousemodel=popup
     set makeprg=./macos.sh
 elseif has('unix')
-    set guifont=Ubuntu\ Mono\ 12
     set mousemodel=popup
     set makeprg=./linux.sh
 endif
 
-" Basic options
+" basic options
 
-" Case statements are a bit screwy with indentation this is the best way I have come up with to get it to work correctly
+" case statements are a bit screwy with indentation this is the best way I have come up with to get it to work correctly
 set cinoptions=l1,b-s
 set cinkeys+=0=break
+
+" to prevent comment wrapping at the end of a line
+set formatoptions+=/
 
 set clipboard=unnamedplus
 set history=500
@@ -127,7 +135,6 @@ set mouse=a
 set encoding=utf-8
 set fileencoding=utf-8
 set ffs=unix,dos
-set t_Co=256
 set shiftwidth=4
 set tabstop=4
 set textwidth=0

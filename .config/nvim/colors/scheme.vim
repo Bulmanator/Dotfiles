@@ -31,10 +31,7 @@ hi StatusLineNC guibg=#18171C gui=BOLD
 
 hi VertSplit    guifg=#18171C guibg=#18171C gui=NONE
 
-" @Note: This highlights the background colour incorrectly when the cursor is
-" on the same line, but there isn't really much I can do about that because it
-" highlights the background colour bright yellow if 'guibg' is not set
-hi Todo         guifg=#E84855 guibg=#232323
+hi Todo         guifg=#E84855 guibg=NONE
 hi cNote        guifg=#35FF77 guibg=NONE
 
 hi PreProc      guifg=#EE6C4D

@@ -1,5 +1,5 @@
 #
-# Variables
+# variables
 #
 
 set $terminal 'alacritty --config-file ~/.config/alacritty/kanto.yml'
@@ -25,17 +25,16 @@ set $ws9  9九
 set $ws10 10十
 
 set $display_left  DP-1
-set $display_right DP-2
+set $display_right DP-3
 
 #
-# Input & keybinds
+# input & keybinds
 #
 
-# Setup keyboard. ISO-UK layout and swap caps lock & escape for vim
+# setup keyboard. iso-uk layout
 #
 input "type:keyboard" {
     xkb_layout  gb
-    xkb_options caps:swapescape
 }
 
 floating_modifier $mod normal

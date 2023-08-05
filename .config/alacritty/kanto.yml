@@ -5,9 +5,9 @@ env:
 
 # Font using 'Ubuntu Mono' because it looks nice
 font:
-    size: 11.0
+    size: 10.0
     normal:
-        family: "Ubuntu Mono"
+        family: "Hack"
 
 # Color scheme. Based off nvim colour scheme
 colors:
